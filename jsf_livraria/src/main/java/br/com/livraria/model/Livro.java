@@ -1,7 +1,8 @@
 package br.com.livraria.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -36,8 +37,16 @@ public class Livro implements Serializable{
 	
 	private double preco;
 	
-	private LocalDateTime dataLancamento;
+	private Date dataLancamento;
 	
 	@ManyToMany
 	private List<Autor> autores;
+	
+	public void adicionarAutor(Autor autor) {
+		if (autores == null) {
+			autores = new ArrayList<Autor>();
+		}
+		
+		autores.add(autor);
+	}
 }

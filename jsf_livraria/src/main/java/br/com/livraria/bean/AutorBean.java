@@ -2,8 +2,8 @@ package br.com.livraria.bean;
 
 import java.io.Serializable;
 
+import br.com.livraria.dao.AutorDAO;
 import br.com.livraria.model.Autor;
-import dao.AutorDAO;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import lombok.Data;
