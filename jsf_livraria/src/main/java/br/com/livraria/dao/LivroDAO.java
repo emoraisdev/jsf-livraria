@@ -15,4 +15,8 @@ public class LivroDAO {
 		return BancoAux.getAll(Livro.class, "Livro");
 	}
 	
+	public void remover(Livro livro) {
+		BancoAux.remover(livro);
+	}
+	
 }

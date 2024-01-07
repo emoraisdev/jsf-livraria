@@ -31,13 +31,10 @@ public class LivroBean implements Serializable {
 	private Livro livro;
 
 	private Long autorId;
-	
-	private List<Livro> listaLivros;
 
 	@PostConstruct
 	public void init() {
 		livro = new Livro();
-		listaLivros = new LivroDAO().getAll();
 	}
 
 	public void gerarMassa() {
@@ -57,6 +54,7 @@ public class LivroBean implements Serializable {
 
 	public void gravar() {
 
+		System.out.println("Salvar Livro: "+livro);
 		if (livro.getAutores() == null || livro.getAutores().isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage("autor", new FacesMessage("O Livro deve possui ao menos um Autor."));
 			return;
@@ -75,15 +73,32 @@ public class LivroBean implements Serializable {
 		}
 		
 	}
+	
+	public void removerAutor(Autor autor) {
+		livro.removerAutor(autor);
+	}
 
 	public List<Autor> getAutores() {
 		return new AutorDAO().getAll();
+	}
+	
+	public List<Livro> getListaLivros() {
+		return new LivroDAO().getAll();
 	}
 	
 	public void validarISBN(FacesContext fc, UIComponent component, Object value) {
 		if (!value.toString().startsWith("1")) {
 			throw new ValidatorException(new FacesMessage("ISBN: Deve Inciar com 1"));
 		}
+	}
+	
+	public String formAutor() {
+		return "autor?faces-redirect=true";
+	}
+	
+	public void remover(Livro livro) {
+		System.out.println("Removendo Livro");
+		new LivroDAO().remover(livro);
 	}
 
 }

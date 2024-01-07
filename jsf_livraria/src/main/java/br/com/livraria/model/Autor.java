@@ -25,6 +25,6 @@ public class Autor implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 	
-	public String nome;
+	private String nome;
 
 }
