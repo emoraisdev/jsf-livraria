@@ -7,6 +7,13 @@
 
 <ui:composition template="_template.xhtml">
 
+
+	<f:metadata>
+		<f:viewParam name="autorId" value="#{autorBean.autorId}" />
+		<f:viewAction action="#{autorBean.carregarAutorPeloId}" 
+			if="#{param.autorId != null}"/>
+	</f:metadata>
+
 	<ui:define name="titulo">
 		Novo autor
 	</ui:define>
@@ -18,14 +25,34 @@
 				<legend>Dados do Autor</legend>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Nome" for="nome"></h:outputLabel>
-					<h:inputText id="nome" value="#{autorBean.autor.nome}"></h:inputText>
+					<h:inputText id="nome" value="#{autorBean.autor.nome}" required="true"/>
 
+					<h:outputLabel value="Email" for="email"></h:outputLabel>
+					<h:inputText id="email" value="#{autorBean.autor.email}" required="true">
+						<f:passThroughAttribute name="type" value="email"/>
+					</h:inputText>
+					
 					<h:commandButton value="Gravar" action="#{autorBean.gravar}">
 					</h:commandButton>
 				</h:panelGrid>
 			</fieldSet>
 		</h:form>
+		
+		<h4>Lista de Autores</h4>
+		<h:dataTable id="listaAutores" value="#{autorBean.autores}"
+			var="autor">
+			<h:column>
+				<h:outputText value=" - #{autor.nome}" />
+			</h:column>
+			<h:column>
+				<h:outputText value="#{autor.email}" />
+			</h:column>
+			<h:column>
+				<h:commandLink value="Remover"/>
+			</h:column>
+		</h:dataTable>
 	</ui:define>
+	
 	<ui:define name="rodape">
 	Autores
 	</ui:define>

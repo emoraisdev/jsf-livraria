@@ -1,6 +1,7 @@
 package br.com.livraria.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 import br.com.livraria.dao.AutorDAO;
 import br.com.livraria.model.Autor;
@@ -20,6 +21,7 @@ public class AutorBean implements Serializable {
 	private static final long serialVersionUID = -707625226127792836L;
 	
 	private Autor autor;
+	private Long autorId = 0L;
 
 	@PostConstruct
 	public void init() {
@@ -29,5 +31,13 @@ public class AutorBean implements Serializable {
 	public String gravar() {
 		new AutorDAO().salvar(autor);
 		return "livro?faces-redirect=true";
+	}
+	
+	public void carregarAutorPeloId() {	
+		autor = new AutorDAO().getById(autorId);
+	}
+	
+	public List<Autor> getAutores() {
+		return new AutorDAO().getAll();
 	}
 }

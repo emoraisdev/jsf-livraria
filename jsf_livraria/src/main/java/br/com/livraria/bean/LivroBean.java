@@ -1,8 +1,6 @@
 package br.com.livraria.bean;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import br.com.livraria.dao.AutorDAO;
@@ -35,21 +33,6 @@ public class LivroBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		livro = new Livro();
-	}
-
-	public void gerarMassa() {
-		Autor joaquim = new Autor(null, "Joaquim");
-		Autor mario = new Autor(null, "Mario");
-
-		new AutorDAO().salvar(joaquim);
-		new AutorDAO().salvar(mario);
-		new AutorDAO().salvar(new Autor(null, "Zonilda"));
-
-		new LivroDAO().salvar(new Livro(null, "Livro 1", "321", 20.5, new Date(), Arrays.asList(joaquim)));
-
-		new LivroDAO()
-				.salvar(new Livro(null, "Livro 2", "321", 20.5, new Date(), Arrays.asList(joaquim, mario)));
-		new LivroDAO().salvar(new Livro(null, "Livro 1", "321", 140.5, new Date(), Arrays.asList(mario)));
 	}
 
 	public void gravar() {

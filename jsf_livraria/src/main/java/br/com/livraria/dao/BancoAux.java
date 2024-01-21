@@ -6,11 +6,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
+import lombok.Data;
 
 public class BancoAux {
 
 	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("bancoPU");
-	private static EntityManager manager = factory.createEntityManager();
+	public static EntityManager manager = factory.createEntityManager();
 
 	public static EntityManager createManager() {
 		return factory.createEntityManager();
@@ -21,6 +22,7 @@ public class BancoAux {
 	}
 
 	public static <T> void salvar(T object) {
+		
 		manager.getTransaction().begin();
 		if (manager.contains(object)) {
 			manager.persist(object);
